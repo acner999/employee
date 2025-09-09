@@ -13,5 +13,4 @@ Esta imagen muestra la documentación interactiva de la API Employee Management 
 
 La interfaz permite probar todos los endpoints directamente desde el navegador.
 
-Fecha de captura: 9 de septiembre de 2025
 URL: http://localhost:8080/swagger-ui/index.html

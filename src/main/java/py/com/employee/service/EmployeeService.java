@@ -1,5 +1,6 @@
 package py.com.employee.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,7 @@ import py.com.employee.exception.EmployeeNotFoundException;
 import py.com.employee.model.Employee;
 import py.com.employee.repository.EmployeeRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -19,6 +21,25 @@ import java.util.List;
 public class EmployeeService implements IEmployeeService {
     
     private final EmployeeRepository employeeRepository;
+    
+    /**
+     * Inicializa datos hardcodeados al arrancar la aplicacion
+     */
+    @PostConstruct
+    public void initializeData() {
+        if (employeeRepository.count() == 0) {
+            // Hardcodear lista inicial de al menos 3 empleados (requisito tecnico)
+            Employee emp1 = new Employee(null, "Carlos Mendoza", "Desarrollador Senior", new BigDecimal("12.5"));
+            Employee emp2 = new Employee(null, "Ana Martinez", "Analista de Sistemas", new BigDecimal("8.8"));
+            Employee emp3 = new Employee(null, "Luis Rodriguez", "Arquitecto de Software", new BigDecimal("15.2"));
+            Employee emp4 = new Employee(null, "Maria Gonzalez", "Product Manager", new BigDecimal("11.0"));
+            
+            employeeRepository.save(emp1);
+            employeeRepository.save(emp2);
+            employeeRepository.save(emp3);
+            employeeRepository.save(emp4);
+        }
+    }
     
     /**
      * Obtiene todos los empleados
