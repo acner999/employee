@@ -1,1 +1,49 @@
+version: '3.8'
+
 services:
+  # Aplicación Spring Boot
+  employee-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: employee-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:employeedb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_H2_CONSOLE_ENABLED=true
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - SPRING_JPA_SHOW_SQL=true
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Base de datos PostgreSQL (opcional - si querés usar BD persistente)
+  postgres:
+    image: postgres:15-alpine
+    container_name: employee-postgres
+    environment:
+      POSTGRES_DB: employeedb
+      POSTGRES_USER: employee_user
+      POSTGRES_PASSWORD: employee_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    profiles:
+      - postgres  # Se activa solo si especificás el profile
+
+volumes:
+  postgres_data:

@@ -1,0 +1,36 @@
+# Archivos y directorios a ignorar en Docker build
+.git
+.gitignore
+README.md
+*.md
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Maven
+target/classes/
+target/test-classes/
+target/generated-sources/
+target/generated-test-sources/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+
+# Docker
+Dockerfile
+docker-compose.yml
+compose.yaml
