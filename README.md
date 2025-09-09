@@ -75,24 +75,7 @@ Una vez iniciada la aplicacion, accede a:
 
 ![Swagger UI - Employee Management API](swagger-screenshot.png)
 
-**Caracteristicas visibles en Swagger:**
 
-- ✅ 4 endpoints documentados (GET, POST, GET por ID, GET search)
-- ✅ Esquema Employee con validaciones
-- ✅ Descripciones en español para cada endpoint  
-- ✅ Ejemplos de respuestas JSON
-- ✅ Interfaz interactiva para probar la API
-
-**Como se ve funcionando:**
-
-1. La interfaz muestra "Employee Management API" como titulo principal
-2. Version OpenAPI 3.0 (OAS 3.0) 
-3. Servidor en http://localhost:8080
-4. Cada endpoint tiene su color distintivo (GET en azul, POST en verde)
-5. Seccion "Schemas" expandible con el modelo Employee
-6. Todas las descripciones en español para uso local
-
-Para probar cualquier endpoint, simplemente haz clic en "Try it out" y ejecuta la peticion directamente desde Swagger.
 
 ### Endpoints
 
