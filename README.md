@@ -14,7 +14,7 @@ API REST para gestion de empleados desarrollada en Spring Boot 3.5.5 con Java 21
 - Manejo de errores personalizado (404 Not Found, validaciones)
 - Documentacion automatica con Swagger/OpenAPI
 - Base de datos H2 en memoria (datos se pierden al reiniciar)
-- Tests unitarios completos
+- Arquitectura en capas con patron de interfaces
 
 ## Tecnologias Utilizadas
 
@@ -25,7 +25,6 @@ API REST para gestion de empleados desarrollada en Spring Boot 3.5.5 con Java 21
 - Spring Validation
 - Swagger/OpenAPI 3
 - Lombok
-- JUnit 5
 - Maven
 
 ## Modelo de Datos
@@ -212,19 +211,6 @@ Content-Type: application/json
 }
 ```
 
-## 🧪 Testing
-
-### Ejecutar tests
-```bash
-./mvnw test
-```
-
-### Cobertura de tests
-- **EmployeeControllerTest**: Tests completos del controlador REST
-- Casos de éxito (200, 201)
-- Casos de error (404, 400)
-- Validaciones de entrada
-
 ## 🗃️ Base de Datos
 
 ### H2 Console
@@ -258,11 +244,8 @@ src/main/java/py/com/employee/
 ├── repository/
 │   └── EmployeeRepository.java       # Repositorio JPA
 └── service/
+    ├── IEmployeeService.java         # Interfaz del servicio
     └── EmployeeService.java          # Lógica de negocio
-
-src/test/java/py/com/employee/
-└── controller/
-    └── EmployeeControllerTest.java   # Tests del controlador
 ```
 
 ## 🎯 Decisiones de Diseño
@@ -275,7 +258,7 @@ src/test/java/py/com/employee/
 ### 2. Arquitectura en Capas
 - **Controller** → **Service** → **Repository**
 - Separación clara de responsabilidades
-- Facilita testing y mantenimiento
+- Facilita mantenimiento y escalabilidad
 
 ### 3. Manejo de Errores
 - **GlobalExceptionHandler** con `@ControllerAdvice`
@@ -294,7 +277,7 @@ src/test/java/py/com/employee/
 
 ## 🔍 Ejemplos de Uso
 
-### Test con cURL (si está disponible)
+### Ejemplos con cURL
 ```bash
 # Obtener todos los empleados
 curl -X GET http://localhost:8080/api/employees
@@ -310,9 +293,6 @@ curl -X GET "http://localhost:8080/api/employees/search?puesto=Desarrollador"
 # Obtener por ID (ejemplo error 404)
 curl -X GET http://localhost:8080/api/employees/999
 ```
-
-### Test Manual
-También incluido en el proyecto: `test-api.html` - Interfaz web simple para probar todos los endpoints.
 
 ## ✅ Cumplimiento de Requerimientos
 
@@ -347,7 +327,7 @@ Este proyecto Spring Boot está totalmente operativo con:
 
 - ✅ **API REST funcional** - Todos los endpoints responden correctamente
 - ✅ **Swagger UI activo** - Documentación interactiva en `http://localhost:8080/swagger-ui.html`
-- ✅ **Tests pasando** - Suite completa de tests unitarios validados
+- ✅ **Arquitectura sólida** - Patrón de interfaces implementado
 - ✅ **Docker listo** - Contenedores configurados para deployment
 - ✅ **Base datos H2** - Datos de prueba cargados automaticamente
 - ✅ **Validaciones activas** - Bean validation funcionando en todos los campos
