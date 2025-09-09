@@ -121,6 +121,7 @@ GET /api/employees
   }
 ]
 ```
+*Nota: Los salarios están expresados en millones de guaraníes (ej: 12.5 = 12.500.000 Gs)*
 
 #### 2. Obtener empleado por ID
 ```http
@@ -133,9 +134,10 @@ GET /api/employees/{id}
   "id": 1,
   "nombre": "Juan Pérez", 
   "puesto": "Desarrollador",
-  "salario": 50000.00
+  "salario": 8.5
 }
 ```
+*Nota: Salario en millones de guaraníes (8.5 = 8.500.000 Gs)*
 
 **Respuesta 404:**
 ```json
@@ -160,16 +162,17 @@ GET /api/employees/search?puesto=Desarrollador
     "id": 1,
     "nombre": "Juan Pérez",
     "puesto": "Desarrollador", 
-    "salario": 50000.00
+    "salario": 8.5
   },
   {
     "id": 3,
     "nombre": "Carlos López",
     "puesto": "Desarrollador",
-    "salario": 55000.00
+    "salario": 9.2
   }
 ]
 ```
+*Nota: Salarios en millones de guaraníes (ej: 8.5 = 8.500.000 Gs)*
 
 #### 4. Crear nuevo empleado
 ```http
@@ -179,7 +182,7 @@ Content-Type: application/json
 {
   "nombre": "Ana Rodríguez",
   "puesto": "Designer",
-  "salario": 48000
+  "salario": 7.2
 }
 ```
 
@@ -189,9 +192,10 @@ Content-Type: application/json
   "id": 5,
   "nombre": "Ana Rodríguez",
   "puesto": "Designer", 
-  "salario": 48000.00
+  "salario": 7.2
 }
 ```
+*Nota: Salario creado en millones de guaraníes (7.2 = 7.200.000 Gs)*
 
 **Respuesta 400 (validación):**
 ```json
@@ -298,7 +302,7 @@ curl -X GET http://localhost:8080/api/employees
 # Crear empleado
 curl -X POST http://localhost:8080/api/employees \
   -H "Content-Type: application/json" \
-  -d '{"nombre":"Test User","puesto":"Tester","salario":45000}'
+  -d '{"nombre":"Test User","puesto":"Tester","salario":7.5}'
 
 # Buscar por puesto  
 curl -X GET "http://localhost:8080/api/employees/search?puesto=Desarrollador"
