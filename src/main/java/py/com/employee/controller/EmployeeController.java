@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import py.com.employee.model.Employee;
-import py.com.employee.service.EmployeeService;
+import py.com.employee.service.IEmployeeService;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import java.util.List;
 @Tag(name = "Employee Management", description = "API para gestion de empleados")
 public class EmployeeController {
     
-    private final EmployeeService employeeService;
+    private final IEmployeeService employeeService;
     
     /**
      * Obtiene todos los empleados registrados

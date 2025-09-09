@@ -11,12 +11,12 @@ import java.util.List;
 
 /**
  * Servicio para manejo de empleados
- * Contiene la logica de negocio principal
+ * Implementa la interfaz IEmployeeService con toda la logica de negocio
  */
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class EmployeeService {
+public class EmployeeService implements IEmployeeService {
     
     private final EmployeeRepository employeeRepository;
     
@@ -60,5 +60,24 @@ public class EmployeeService {
         // Para cumplir con el requisito de mantener datos en memoria
         // aunque se pierdan al reiniciar, usamos H2 en modo memory
         return employeeRepository.save(employee);
+    }
+    
+    /**
+     * Verifica si existe un empleado con el ID dado
+     * @param id el ID a verificar
+     * @return true si existe, false si no
+     */
+    @Transactional(readOnly = true)
+    public boolean existsById(Long id) {
+        return employeeRepository.existsById(id);
+    }
+    
+    /**
+     * Cuenta el total de empleados
+     * @return número total de empleados
+     */
+    @Transactional(readOnly = true)
+    public long countEmployees() {
+        return employeeRepository.count();
     }
 }
